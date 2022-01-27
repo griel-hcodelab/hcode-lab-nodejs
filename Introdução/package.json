@@ -1,0 +1,28 @@
+{
+  "name": "nodejs-developer",
+  "version": "1.0.0",
+  "description": "Projeto em NodeJS do Hcode Lab",
+  "private": false,
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index",
+    "test": "echo Fazendo teste",
+    "prebuild": "echo PRE BUILD 🔨. Um comando com pre antes do nome é executado antes do comando && npm run test",
+    "build": "echo BUILD Feito",
+    "postbuild": "echo POST BUILD executado após o comando principal",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/griel-hcodelab/hcode-lab-nodejs.git"
+  },
+  "author": "Roberto Griel Filho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/griel-hcodelab/hcode-lab-nodejs/issues"
+  },
+  "homepage": "https://github.com/griel-hcodelab/hcode-lab-nodejs#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
