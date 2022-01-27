@@ -1,20 +1,24 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
+import { UsersService } from './users.service';
+
 
 //Sempre que houver uma rota /users, será invocada esse controller
 @Controller('users')
 export class UsersController {
 
-    @Get()
-    getUsers() {
+    constructor(private UsersService: UsersService) { }
 
-        return 'Listando todos os usuários';
+    @Get()
+    read() {
+
+        return this.UsersService.list()
 
     }
 
     @Post()
     create(@Body('name') nome_qualquer, @Body() body) {
 
-        return nome_qualquer;
+        return this.UsersService.save(body);
 
     }
 
@@ -24,19 +28,16 @@ export class UsersController {
         @Body() body_do_update
         ) {
 
-        return {
-            nome_que_estou_esperando,
-            body_do_update
-        };
+        const user = this.UsersService.get(nome_que_estou_esperando);
+
+        return this.UsersService.save(body_do_update);
 
     }
 
     @Delete('/:id')
     remove(@Param('id') id:Number, @Res() response) {
 
-        response.send({ id })
-
-        //return { id }
+        return this.UsersService.delete(id);
 
     }
 
