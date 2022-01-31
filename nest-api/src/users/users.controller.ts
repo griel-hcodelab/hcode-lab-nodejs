@@ -1,43 +1,44 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 
-
-//Sempre que houver uma rota /users, será invocada esse controller
 @Controller('users')
 export class UsersController {
 
-    constructor(private UsersService: UsersService) { }
+    constructor(private usersService: UsersService){
+
+        //Estou injetando dentro dessa classe um atributo privado cujo tipo será minha classe UserService
+        //Deste modo posso trazer todos os métodos do serviço
+
+    }
 
     @Get()
-    read() {
+    read(){
 
-        return this.UsersService.list()
+        return this.usersService.list()
 
     }
 
     @Post()
-    create(@Body('name') nome_qualquer, @Body() body) {
-
-        return this.UsersService.save(body);
+    create(@Req() variavel_com_qualqur_nome, @Body('name') body, @Body('password') password){
+        //Posso usar qualquer nome como a variável que vai receber o campo do POST
+        return this.usersService.save(body);
 
     }
 
     @Put('/:id')
-    update(
-        @Param('id') nome_que_estou_esperando: Number,
-        @Body() body_do_update
-        ) {
+    update(@Param('id') userId, @Body() body) {
 
-        const user = this.UsersService.get(nome_que_estou_esperando);
+        const user = this.usersService.get(userId);
 
-        return this.UsersService.save(body_do_update);
+        return this.usersService.save(body)
 
     }
 
     @Delete('/:id')
-    remove(@Param('id') id:Number, @Res() response) {
+    remove(@Param('id') userId: number){
 
-        return this.UsersService.delete(id);
+        return this.usersService.remove(userId)
+
 
     }
 

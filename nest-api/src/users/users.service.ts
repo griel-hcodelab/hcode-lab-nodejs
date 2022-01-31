@@ -1,35 +1,40 @@
+/*
+https://docs.nestjs.com/providers#services
+*/
+
 import { BadRequestException, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
 
-    list() {
+    list(){
 
         return 'Listando todos os usuários';
 
     }
 
-    save(data: any) {
-
-        if (!data.name) {
-            throw new BadRequestException('Infome o nome do usuário');
+    save(data: any)
+    {
+        if (!data) {
+            throw new BadRequestException('Informe o nome do usuário')
         }
 
-        return 'Dados salvos com sucesso';
+        return `Dados salvos com sucesso. ${data}`
+    }
+
+    get(id: number)
+    {
+        return `Obtive o usuário ${id}`;
+    }
+
+    update()
+    {
 
     }
 
-    get(id: Number) {
-
-        return `Retornando os dados do usuário ID ${id}`;
-
+    remove(id: number)
+    {
+        return `Exclui o usuário ${id}`
     }
-
-    delete(id: Number) {
-
-        return `Excluindo o usuário ID ${id}`;
-
-    }
-
 
 }
